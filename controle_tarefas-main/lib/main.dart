@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
-import 'screens/tarefa/lista_tarefas.dart';
+import 'repository/configuracao_persistencia.dart';
+import 'screens/dashboard.dart';
 
-void main() => runApp(const TaskApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await ConfiguracaoPersistencia.carregar();
+  runApp(const TaskApp());
+}
 
 class TaskApp extends StatelessWidget {
   const TaskApp({super.key});
@@ -9,8 +14,9 @@ class TaskApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Controle de Tarefas',
       debugShowCheckedModeBanner: false,
-      home: ListaTarefas(),
+      home: const Dashboard(),
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),

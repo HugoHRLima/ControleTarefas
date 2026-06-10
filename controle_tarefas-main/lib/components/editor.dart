@@ -5,23 +5,31 @@ class Editor extends StatelessWidget {
   final String? rotulo;
   final String? dica;
   final IconData? icone;
+  final TextInputType? tipoTeclado;
 
-  Editor({this.controlador, this.rotulo, this.dica, this.icone});
+  const Editor({
+    this.controlador,
+    this.rotulo,
+    this.dica,
+    this.icone,
+    this.tipoTeclado,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16.0),
       child: TextField(
         controller: controlador,
-        style: TextStyle(fontSize: 25),
+        style: const TextStyle(fontSize: 25.0),
         decoration: InputDecoration(
           icon: icone != null ? Icon(icone) : null,
-
           labelText: rotulo,
           hintText: dica,
         ),
-        keyboardType: TextInputType.number,
+        keyboardType: tipoTeclado ?? TextInputType.text,
+        maxLines: tipoTeclado == TextInputType.multiline ? 3 : 1,
       ),
     );
   }
